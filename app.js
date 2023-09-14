@@ -25,7 +25,7 @@ const server = http.createServer((req, res) => {
             res.end(JSON.stringify(data));
         }
         
-    //add an item by sending a PUT request to http://localhost:3000/api/shoppinglist with the body containing a JSON shoppinglist item
+    //add an item by sending a POST request to http://localhost:3000/api/shoppinglist with the body containing a JSON shoppinglist item
     //example: {"name": "milk" , "quantity": "4", "price": "2.00"}
     }else if(req.method === 'POST'&& url.parse(req.url).pathname === '/api/shoppinglist'){
         let body = '';
