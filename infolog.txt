@@ -1,0 +1,18 @@
+2023-09-14T20:37:03.980Z [info]: GET: "the shopping list is empty, add some items why don't you?"
+2023-09-14T20:37:06.857Z [info]: created new item: {"name":"milk","quantity":"4","price":"2.00","bought":false}
+2023-09-14T20:37:10.707Z [info]: GET: "1 | name: milk | quantity: 4 | Price: 2.00 | Purchased? false.          "
+2023-09-14T20:37:15.243Z [info]: toggled: milk
+2023-09-14T20:37:17.247Z [info]: GET: "1 | name: milk | quantity: 4 | Price: 2.00 | Purchased? true.          "
+2023-09-14T20:38:39.657Z [info]: GET: "the shopping list is empty, add some items why don't you?"
+2023-09-14T20:38:42.604Z [info]: created new item: {"name":"milk","quantity":"4","price":"2.00","bought":false}
+2023-09-14T20:38:43.868Z [info]: created new item: {"name":"milk","quantity":"4","price":"2.00","bought":false}
+2023-09-14T20:38:47.143Z [info]: GET: "1 | name: milk | quantity: 4 | Price: 2.00 | Purchased? false.          2 | name: milk | quantity: 4 | Price: 2.00 | Purchased? false.          "
+2023-09-14T20:38:52.526Z [info]: toggled: milk
+2023-09-14T20:38:56.848Z [info]: GET: "1 | name: milk | quantity: 4 | Price: 2.00 | Purchased? true.          2 | name: milk | quantity: 4 | Price: 2.00 | Purchased? false.          "
+2023-09-14T20:39:01.736Z [info]: deleted: milk
+2023-09-14T20:39:04.386Z [info]: GET: "1 | name: milk | quantity: 4 | Price: 2.00 | Purchased? false.          "
+2023-09-14T20:39:07.030Z [info]: deleted: milk
+2023-09-14T20:39:09.790Z [error]: toggle:user attempted to toggle item 1 but it was not found, the list was 0 long
+2023-09-14T20:39:16.585Z [error]: delete:user attempted to delete item 1 but it was not found, the list was 0 long
+2023-09-14T20:39:18.005Z [error]: delete:user attempted to delete item 1 but it was not found, the list was 0 long
+2023-09-14T20:39:18.742Z [error]: delete:user attempted to delete item 1 but it was not found, the list was 0 long
