@@ -148,3 +148,57 @@
 2023-09-15T18:00:56.029Z [info]: created new item: {"name":"milk","quantity":2,"price":3,"bought":false}
 2023-09-15T18:00:56.032Z [info]: deleted: milk
 2023-09-15T18:00:56.036Z [error]: delete:user attempted to delete item 0 but it was not found, the list was 2 long
+2023-09-15T19:44:22.458Z [info]: created new item: {"name":"milk","quantity":"4","price":"2.00","bought":false}
+2023-09-15T19:44:29.374Z [info]: GET: "1 | name: milk | quantity: 4 | Price: 2.00 | Purchased? false."
+2023-09-15T19:45:59.316Z [info]: created new item: {"name":"milk","quantity":"4","price":"2.00","bought":false}
+2023-09-15T19:46:02.974Z [info]: GET: "1 | name: milk | quantity: 4 | Price: 2.00 | Purchased? false."
+2023-09-15T19:46:06.137Z [info]: toggled: milk
+2023-09-15T19:46:10.623Z [info]: GET: "1 | name: milk | quantity: 4 | Price: 2.00 | Purchased? true."
+2023-09-15T19:46:16.614Z [error]: delete:user attempted to delete item 2 but it was not found, the list was 1 long
+2023-09-15T19:46:16.615Z [info]: deleted: milk
+2023-09-15T19:46:19.702Z [info]: GET: "the shopping list is empty, add some items why don't you?"
+2023-09-15T19:46:24.046Z [error]: delete:user attempted to delete item 2 but it was not found, the list was 0 long
+2023-09-15T19:46:24.047Z [error]: delete:user attempted to delete item 1 but it was not found, the list was 0 long
+2023-09-15T19:49:42.906Z [info]: created new item: {"name":"milk","quantity":"4","price":"2.00","bought":false}
+2023-09-15T19:49:46.553Z [info]: GET: "1 | name: milk | quantity: 4 | Price: 2.00 | Purchased? false."
+2023-09-15T19:49:51.472Z [info]: toggled: milk
+2023-09-15T19:50:00.019Z [info]: deleted: milk
+2023-09-15T19:50:07.227Z [info]: GET: "the shopping list is empty, add some items why don't you?"
+2023-09-15T19:50:12.496Z [error]: delete:user attempted to delete item 1 but it was not found, the list was 0 long
+2023-09-15T20:01:28.073Z [info]: created new item: {"name":"milk","quantity":2,"price":3,"bought":false}
+2023-09-15T20:01:28.079Z [info]: GET: "1 | name: milk | quantity: 2 | Price: 3 | Purchased? false."
+2023-09-15T20:01:28.084Z [info]: deleted: milk
+2023-09-15T20:01:28.088Z [info]: GET: "the shopping list is empty, add some items why don't you?"
+2023-09-15T20:01:28.092Z [error]: delete:user attempted to delete item 1 but it was not found, the list was 0 long
+2023-09-15T20:01:28.098Z [info]: created new item: {"name":"milk","quantity":2,"price":3,"bought":false}
+2023-09-15T20:01:28.115Z [info]: created new item: {"name":"milk","quantity":2,"price":3,"bought":false}
+2023-09-15T20:01:28.121Z [info]: toggled: milk
+2023-09-15T20:02:16.026Z [info]: created new item: {"name":"milk","quantity":2,"price":3,"bought":false}
+2023-09-15T20:02:16.033Z [info]: GET: "1 | name: milk | quantity: 2 | Price: 3 | Purchased? false."
+2023-09-15T20:02:16.038Z [info]: deleted: milk
+2023-09-15T20:02:16.042Z [info]: GET: "the shopping list is empty, add some items why don't you?"
+2023-09-15T20:02:16.046Z [error]: delete:user attempted to delete item 1 but it was not found, the list was 0 long
+2023-09-15T20:02:16.052Z [info]: created new item: {"name":"milk","quantity":2,"price":3,"bought":false}
+2023-09-15T20:02:16.069Z [info]: created new item: {"name":"milk","quantity":2,"price":3,"bought":false}
+2023-09-15T20:02:16.074Z [info]: toggled: milk
+2023-09-15T20:20:34.296Z [info]: toggled: milk
+2023-09-15T20:21:11.841Z [info]: toggled: milk
+2023-09-15T20:22:20.777Z [info]: toggled: milk
+2023-09-15T20:23:28.720Z [info]: toggled: milk
+2023-09-15T20:25:40.120Z [info]: toggled: milk
+2023-09-15T20:25:40.127Z [info]: deleted: milk
+2023-09-15T20:26:29.059Z [info]: toggled: milk
+2023-09-15T20:26:29.067Z [info]: deleted: milk
+2023-09-15T20:29:25.881Z [info]: toggled: milk
+2023-09-15T20:29:25.886Z [info]: deleted: milk
+2023-09-15T20:31:15.569Z [info]: toggled: milk
+2023-09-15T20:31:15.573Z [info]: deleted: milk
+2023-09-15T20:31:51.494Z [info]: toggled: milk
+2023-09-15T20:31:51.498Z [info]: deleted: milk
+2023-09-15T20:33:50.063Z [info]: toggled: milk
+2023-09-15T20:33:50.065Z [error]: toggle:user attempted to toggle item 2 but it was not found, the list was 1 long
+2023-09-15T20:33:50.066Z [info]: deleted: milk
+2023-09-15T20:36:01.368Z [info]: toggled: milk
+2023-09-15T20:36:01.370Z [error]: toggle:user attempted to toggle item 2 but it was not found, the list was 1 long
+2023-09-15T20:36:01.371Z [info]: deleted: milk
+2023-09-15T20:36:01.375Z [error]: delete:user attempted to delete item 3 but it was not found, the list was 1 long

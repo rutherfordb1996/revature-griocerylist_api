@@ -30,3 +30,12 @@
 2023-09-15T18:00:56.008Z [error]: delete:user attempted to delete item 1 but it was not found, the list was 0 long
 2023-09-15T18:00:56.024Z [error]: toggle:user attempted to toggle item 0 but it was not found, the list was 2 long
 2023-09-15T18:00:56.036Z [error]: delete:user attempted to delete item 0 but it was not found, the list was 2 long
+2023-09-15T19:46:16.614Z [error]: delete:user attempted to delete item 2 but it was not found, the list was 1 long
+2023-09-15T19:46:24.046Z [error]: delete:user attempted to delete item 2 but it was not found, the list was 0 long
+2023-09-15T19:46:24.047Z [error]: delete:user attempted to delete item 1 but it was not found, the list was 0 long
+2023-09-15T19:50:12.496Z [error]: delete:user attempted to delete item 1 but it was not found, the list was 0 long
+2023-09-15T20:01:28.092Z [error]: delete:user attempted to delete item 1 but it was not found, the list was 0 long
+2023-09-15T20:02:16.046Z [error]: delete:user attempted to delete item 1 but it was not found, the list was 0 long
+2023-09-15T20:33:50.065Z [error]: toggle:user attempted to toggle item 2 but it was not found, the list was 1 long
+2023-09-15T20:36:01.370Z [error]: toggle:user attempted to toggle item 2 but it was not found, the list was 1 long
+2023-09-15T20:36:01.375Z [error]: delete:user attempted to delete item 3 but it was not found, the list was 1 long
