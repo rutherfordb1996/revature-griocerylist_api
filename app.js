@@ -1,57 +1,120 @@
-let shoppinglist = [];
-const http = require("http");
-const url = require('node:url');
+const groceryItemDao = require('./groceryDAO')
+
+const express = require('express');
+const server = express();
 const PORT = 3000;
-function createShoppinglistItem(name, quantity, price){
-    this.name = name;
-    this.quantity = quantity;
-    this.price = price;
-    this.bought = false;
-}
-const { createLogger, transports, format } = require('winston');
 
-function addItem(name, quantity, price, list){
-    list.push(new createShoppinglistItem(name,quantity,price));
-    shoppinglist = list;
-    return(list[list.length -1]);
+const uuid = require('uuid');
+
+const bodyParser = require('body-parser');
+
+server.use(bodyParser.json());
+
+server.get('/', (req, res) => {
+    res.send('Hello World');
+});
+
+function validateNewItem(req, res, next){
+    if(!req.body.name || !req.body.quantity || !req.body.price){
+        req.body.valid = false;
+        next();
+    }else{
+        req.body.valid = true;
+        next();
+    }
 }
-function printlist(list){
-    let data = '';
-    if(list.length > 0){
-        for( let i = 0; i < list.length; i++){
-            data += `${i+1} | name: ${list[i].name} | quantity: ${list[i].quantity} | Price: ${list[i].price} | Purchased? ${list[i].bought}.`;
-        }
+server.post('/groceries',validateNewItem, (req, res) => {
+    const body = req.body;
+    if(req.body.valid){
+        groceryItemDao.addGroceryItem(uuid.v4(), body.name, body.quantity, body.price, false)
+            .then((data) => {
+                res.send({
+                    message: "Successfully Added Item!"
+                })
+            })
+            .catch((err) => {
+                res.send({
+                    message: "Failed to Add Item!"
+                })
+            })
+    }else{
+        res.send({
+            message: "Invalid Item properties"
+        })
     }
-    else{
-        data += "the shopping list is empty, add some items why don't you?";
-    }
-    return(JSON.stringify(data));
-}
-function toggleItemBought(index, list){
-    if(index < list.length){
-        list[index].bought = true;
-        logger.info("toggled: "+`${list[index].name}`);
-        shoppinglist = list;
-        return(list[index]);
-    }
-    else{
-        logger.error("toggle:" +`user attempted to toggle item ${index} but it was not found, the list was ${list.length} long`);
-        return({"response":"the index you requested to delete does not exist"});
-    }   
-}
-function deleteItem(index, list){
-    if(index < list.length){
-        logger.info("deleted: "+`${list[index].name}`);
-        list.splice(index,1);
-        shoppinglist = list;
-        return(shoppinglist);
-    }
-    else{
-        logger.error("delete:" +`user attempted to delete item ${index+1} but it was not found, the list was ${list.length} long`);
-        return({message: 'Sorry, there doesnt appear to be anything to delete'})
-    }
+})
+server.get('/groceries', (req, res) => {
+    groceryItemDao.retrieveAllGroceryItems()
+        .then((data) => {
+            res.send(data.Items);
+        })
+        .catch((err) => {
+            res.send("failed to retrieve list!")
+        })
+})
+server.patch('/groceries', (req,res) => {
+    getItemID(req.query.index)
+    .then((data) => {
+        groceryItemDao.updateGroceryNameById(data)
+        .then((data) => {
+            res.send("Item updated!")
+        })
+        .catch((err) => {
+            res.send("Failed to update")
+        })
+    })
+    .catch((err)=>{
+        res.send('failed to find item with that index')
+    })
+})
+server.delete('/groceries', (req,res) => {
+    getItemID(req.query.index)
+    .then((data) => {
+        groceryItemDao.deleteGroceryItemById(data)
+        .then((data) => {
+            res.send("Item deleted!")
+        })
+        .catch((err) => {
+            res.send("Failed to delete")
+        })
+    })
+    .catch((err)=>{
+        res.send('failed to find item with that index')
+    })
+})
+
+server.listen(PORT, () => {
+    console.log(`Server is listening on Port: ${PORT}`);
+});
+
+//const { createLogger, transports, format, add } = require('winston');
+
+function getItemID(index){
+    let res = new Promise((resolve, reject) => {
+        groceryItemDao.retrieveAllGroceryItems()
+        .then((data) => {
+             resolve(data.Items[index-1].item_id);
+        })
+        .catch((err) => {
+            reject(err);
+        });
+    });
+    return(res)
 }
 
+function deleteItem(id){
+    groceryItemDao.deleteGroceryItemById(id)
+    .then((data) => {
+        console.log(data);
+        return("The item has been deleted");
+    })
+    .catch((err) => {
+        console.error(err);
+        return("there was an error: "+ err);
+     });
+}
+
+/*
 // create the logger
 const logger = createLogger({
     level: 'info', // this will log only messages with the level 'info' and above
@@ -72,9 +135,16 @@ const server = http.createServer((req, res) => {
     // view the list by sending a GET request to http://localhost:3000/api/shoppinglist
     if (req.method === 'GET' && url.parse(req.url).pathname === '/api/shoppinglist'){
         res.writeHead(200, { 'Content-Type': 'application/json'});
-        const response = printlist(shoppinglist)
-        res.end(response);
-        logger.info("GET: " + response);
+        printItems()
+        .then((response) => {
+            res.end(response);
+            logger.info("GET: " + response);
+        })
+        .catch((err) => {
+            res.end(err);
+            logger.error("GET: " + err);
+        })
+        
     }
         
     //add an item by sending a POST request to http://localhost:3000/api/shoppinglist with the body containing a JSON shoppinglist item
@@ -88,7 +158,7 @@ const server = http.createServer((req, res) => {
             const data = JSON.parse(body);
             console.log(data);
             let response;
-            shoppinglist, response = addItem(data.name,data.quantity,data.price, shoppinglist);
+            response = addItem(data.name,data.quantity,data.price);
             res.writeHead(201, {'Content-Type': 'application/json'});
             res.end(JSON.stringify(response));
             logger.info("created new item: "+JSON.stringify(response));
@@ -98,8 +168,7 @@ const server = http.createServer((req, res) => {
     else if(req.method === "PATCH" && url.parse(req.url).pathname === '/api/shoppinglist'){
         const requestUrl = parseInt(url.parse(req.url).query);
         console.log(requestUrl);
-        let response;
-        shoppinglist, response = toggleItemBought(requestUrl-1, shoppinglist);
+        let response = toggleItemBought(requestUrl-1);
         res.end(JSON.stringify(response));
         
     }
@@ -107,8 +176,7 @@ const server = http.createServer((req, res) => {
     else if(req.method === "DELETE" && url.parse(req.url).pathname === '/api/shoppinglist'){
         const requestUrl = parseInt(url.parse(req.url).query);
         console.log(requestUrl);
-        let response;
-        shoppinglist, response = deleteItem(requestUrl-1, shoppinglist);
+        let response = deleteItembyindex(requestUrl-1);
         res.end(JSON.stringify(response));
         
     }else{
@@ -121,4 +189,5 @@ const server = http.createServer((req, res) => {
 server.listen(PORT, () => {
     console.log(`Server is listening on http://localhost:${PORT}`);
 })
-module.exports ={createShoppinglistItem, printlist, addItem, toggleItemBought, deleteItem};
+*/
+//module.exports ={printItems, addItem, toggleItemBought, deleteItem};
